@@ -1,0 +1,146 @@
+{
+  "hero": {
+    "title": "Creating Unforgettable Moments Through Engaging Hosting ✨",
+    "subtitle": "Energy Moments Memories",
+    "booking": "7207656189",
+    "email": "enquiry@emceedaya.com",
+    "instagram": "https://www.instagram.com/emcee_daya/",
+    "youtube": ""
+  },
+  "stats": {
+    "title": "Numbers That Speak",
+    "subtitle": "Proven track record of successful events",
+    "achievements": [
+      {
+        "number": 100,
+        "label": "Events Hosted",
+        "suffix": "+"
+      },
+      {
+        "number": 2024,
+        "label": "Since", 
+        "suffix": ""
+      },
+      {
+        "number": 100,
+        "label": "Happy Clients",
+        "suffix": "+"
+      }
+    ]
+  },
+  "services": {
+    "title": "Services",
+    "subtitle": "Professional DJ services for every occasion",
+    "services": [
+      {
+        "id": "wedding",
+        "title": "Wedding Events",
+        "description": "Make your special day unforgettable with perfect music selection and seamless mixing for ceremonies, receptions, and celebrations."
+      },
+      {
+        "id": "corporate",
+        "title": "Corporate Events",
+        "description": "Professional DJ services for corporate parties, product launches, conferences, and team building events with appropriate music selection."
+      },
+      {
+        "id": "private",
+        "title": "Private Parties",
+        "description": "Birthday parties, anniversaries, house parties, and intimate gatherings with customized playlists and energy management."
+      }
+    ]
+  },
+  "portfolio": {
+    "title": "Portfolio",
+    "subtitle": "Recent performances and events",
+    "items": [
+      {
+        "id": "wedding-mumbai",
+        "title": "Mumbai Wedding Reception",
+        "description": "Grand wedding reception with 500+ guests featuring Bollywood and international hits",
+        "image": "/images/portfolio/wedding.jpg",
+        "category": "Wedding"
+      },
+      {
+        "id": "corporate-delhi",
+        "title": "Corporate Annual Party",
+        "description": "Tech company's annual celebration with modern EDM and corporate-friendly tracks",
+        "image": "/images/portfolio/corporate.jpg", 
+        "category": "Corporate"
+      },
+      {
+        "id": "college-fest",
+        "title": "College Festival Performance",
+        "description": "High-energy performance at university cultural fest with diverse music genres",
+        "image": "/images/portfolio/college.jpg",
+        "category": "Festival"
+      },
+      {
+        "id": "sangeet-ceremony",
+        "title": "Traditional Sangeet Night",
+        "description": "Perfect blend of traditional and modern music for pre-wedding celebrations",
+        "image": "/images/portfolio/sangeet.jpg",
+        "category": "Traditional"
+      }
+    ]
+  },
+  "testimonials": {
+    "title": "What Clients Say",
+    "subtitle": "Real feedback from real events",
+    "testimonials": [
+      {
+        "id": "priya-wedding",
+        "name": "Priya & Rahul Sharma",
+        "title": "Wedding Reception",
+        "content": "Michelle DJ made our wedding absolutely magical! Her music selection was perfect and she kept everyone dancing all night long. Professional and amazing!",
+        "avatar": "/images/testimonials/priya.jpg",
+        "rating": 5
+      },
+      {
+        "id": "tech-corp",
+        "name": "Tech Solutions Inc.",
+        "title": "Corporate Event",
+        "content": "Outstanding performance at our corporate event. Michelle understood our vibe perfectly and created an amazing atmosphere. Highly recommended!",
+        "avatar": "/images/testimonials/corporate.jpg",
+        "rating": 5
+      }
+    ]
+  },
+  "blog": {
+    "title": "Latest Insights",
+    "subtitle": "Tips, stories, and updates from the music industry",
+    "posts": [
+      {
+        "id": "wedding-music-guide",
+        "title": "Ultimate Wedding Music Guide",
+        "excerpt": "Essential tips for choosing the perfect soundtrack for your special day",
+        "image": "/images/blog/wedding-music.jpg",
+        "date": "2025-01-15",
+        "readTime": "5 min read",
+        "category": "Wedding Tips"
+      },
+      {
+        "id": "corporate-event-vibes",
+        "title": "Creating the Right Corporate Event Atmosphere",
+        "excerpt": "How to balance professionalism with entertainment at corporate events",
+        "image": "/images/blog/corporate-vibes.jpg",
+        "date": "2025-01-10",
+        "readTime": "4 min read",
+        "category": "Corporate"
+      }
+    ]
+  },
+  "contact": {
+    "title": "Let's Create Magic Together",
+    "subtitle": "Ready to make your event unforgettable? Get in touch!",
+    "email": "enquiry@emceedaya.com",
+    "phone": "+91 72076 56189",
+    "address": "Hyderabad, Telangana, India",
+    "social": [
+      {
+        "platform": "instagram",
+        "url": "https://www.instagram.com/emcee_daya/",
+        "icon": "instagram"
+      }
+    ]
+  }
+} 
