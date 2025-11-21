@@ -72,14 +72,14 @@ export function ClientReviews() {
   ];
 
   return (
-    <section id="reviews" className="relative py-20 md:py-32 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 overflow-hidden overflow-x-hidden">
+    <section id="reviews" className="relative py-20 md:py-32 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 overflow-hidden overflow-x-hidden overflow-y-hidden" style={{ transform: 'translateZ(0)', willChange: 'scroll-position' }}>
       {/* Background Beams */}
       <BackgroundBeams />
       
       {/* Additional Background Effects */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-cyan-900/10 via-slate-950 to-slate-950 z-10"></div>
       
-      <div className="container mx-auto px-4 relative z-20 overflow-x-hidden w-full max-w-full">
+      <div className="container mx-auto px-4 relative z-20 overflow-x-hidden overflow-y-hidden w-full max-w-full">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -105,10 +105,10 @@ export function ClientReviews() {
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
           viewport={{ once: true, margin: "-100px" }}
-          className="flex flex-col antialiased items-center justify-center relative w-full overflow-x-hidden"
+          className="flex flex-col antialiased items-center justify-center relative w-full overflow-x-hidden overflow-y-hidden"
           style={{ willChange: 'transform, opacity' }}
         >
-          <div className="w-full overflow-x-hidden">
+          <div className="w-full overflow-x-hidden overflow-y-hidden">
             <InfiniteMovingCards
               items={clientTestimonials}
               direction="right"
@@ -119,7 +119,7 @@ export function ClientReviews() {
           </div>
           
           {/* Second Row - Opposite Direction */}
-          <div className="w-full overflow-x-hidden">
+          <div className="w-full overflow-x-hidden overflow-y-hidden">
             <InfiniteMovingCards
               items={testimonials2}
               direction="left"

@@ -73,10 +73,10 @@ export const InfiniteMovingCards = ({
     <div
       ref={containerRef}
       className={cn(
-        "scroller relative z-20 max-w-7xl overflow-hidden [mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent)] w-full",
+        "scroller relative z-20 max-w-7xl overflow-hidden overflow-y-hidden [mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent)] w-full",
         className
       )}
-      style={{ contain: 'layout style paint' }}
+      style={{ contain: 'layout style paint', overflowY: 'hidden' }}
     >
       <ul
         ref={scrollerRef}
@@ -85,7 +85,7 @@ export const InfiniteMovingCards = ({
           start && "animate-scroll ",
           pauseOnHover && "hover:[animation-play-state:paused]"
         )}
-        style={{ willChange: 'transform' }}
+        style={{ willChange: 'transform', overflowY: 'hidden' }}
       >
         {items.map((item) => (
           <li

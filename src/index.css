@@ -220,6 +220,13 @@ html {
   perspective: 1000;
 }
 
+/* Prevent layout shifts and flickering */
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+  position: relative;
+}
+
 /* Optimize animations for better scroll performance */
 [data-motion-component] {
   will-change: transform, opacity;
@@ -238,6 +245,17 @@ div[style*="transform"] {
 body {
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-y: contain;
+  /* Prevent flickering */
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+
+/* Optimize all sections for smooth scrolling */
+section {
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  will-change: scroll-position;
+  contain: layout style paint;
 }
 
 /* Custom cursor for interactive elements */
