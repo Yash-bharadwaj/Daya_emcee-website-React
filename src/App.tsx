@@ -51,7 +51,7 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
+    <div className="min-h-screen bg-background text-foreground overflow-x-hidden" style={{ overflowX: 'hidden', width: '100%' }}>
       <Navigation />
       
       <main>

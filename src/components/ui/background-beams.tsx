@@ -19,6 +19,11 @@ export const BackgroundBeams = ({ className }: { className?: string }) => {
         "absolute inset-0 overflow-hidden z-0",
         className
       )}
+      style={{ 
+        willChange: 'transform',
+        transform: 'translateZ(0)',
+        contain: 'layout style paint'
+      }}
     >
       <svg
         className="absolute inset-0 h-full w-full pointer-events-none"

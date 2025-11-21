@@ -206,6 +206,38 @@
 /* Smooth scrolling */
 html {
   scroll-behavior: smooth;
+  /* Prevent flickering during scroll */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Performance optimizations to prevent flickering */
+* {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-perspective: 1000;
+  perspective: 1000;
+}
+
+/* Optimize animations for better scroll performance */
+[data-motion-component] {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+
+/* Optimize all motion divs */
+div[style*="transform"] {
+  will-change: transform;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+
+/* Reduce repaints during scroll */
+body {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
 }
 
 /* Custom cursor for interactive elements */
@@ -289,6 +321,11 @@ html {
 .scroller {
   --animation-duration: 40s;
   --animation-direction: forwards;
+  /* Performance optimization */
+  will-change: transform;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  contain: layout style paint;
 }
 
 @keyframes scroll {
@@ -299,6 +336,10 @@ html {
 
 .scroller .animate-scroll {
   animation: scroll var(--animation-duration) linear var(--animation-direction) infinite;
+  /* Performance optimization */
+  will-change: transform;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
 }
 
 /* Hide scrollbar for performance reels */
