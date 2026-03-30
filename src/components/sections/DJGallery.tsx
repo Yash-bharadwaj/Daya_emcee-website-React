@@ -42,6 +42,8 @@ export function DJGallery() {
               src="/dj1.jpeg"
               alt="Michelle DJ performance"
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+              loading="lazy"
+              decoding="async"
             />
           </motion.div>
 
@@ -58,6 +60,8 @@ export function DJGallery() {
               src="/dj2.jpeg"
               alt="Michelle DJ performance"
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+              loading="lazy"
+              decoding="async"
             />
           </motion.div>
 
@@ -74,6 +78,8 @@ export function DJGallery() {
               src="/dj3.jpeg"
               alt="Michelle DJ performance"
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+              loading="lazy"
+              decoding="async"
             />
           </motion.div>
 
@@ -90,6 +96,8 @@ export function DJGallery() {
               src="/dj4.jpeg"
               alt="Michelle DJ performance"
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+              loading="lazy"
+              decoding="async"
             />
           </motion.div>
         </div>

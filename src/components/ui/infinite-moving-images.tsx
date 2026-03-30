@@ -97,6 +97,7 @@ export const InfiniteMovingImages = ({
                 alt={`Emcee Daya gallery ${idx + 1}`}
                 className="w-full h-[240px] md:h-[280px] object-cover rounded-xl"
                 loading="lazy"
+                decoding="async"
               />
             </div>
           </li>

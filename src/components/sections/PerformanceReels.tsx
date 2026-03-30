@@ -5,6 +5,55 @@ import { BackgroundBeams } from "../ui/background-beams";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useRef, useState, useEffect } from "react";
 
+function LazyVideo({
+  src,
+  className,
+}: {
+  src: string;
+  className?: string;
+}) {
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [shouldLoad, setShouldLoad] = useState(false);
+
+  useEffect(() => {
+    const el = wrapRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry?.isIntersecting) {
+          setShouldLoad(true);
+        }
+      },
+      { rootMargin: "240px", threshold: 0.05 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v || !shouldLoad) return;
+    v.play().catch(() => {});
+  }, [shouldLoad]);
+
+  return (
+    <div ref={wrapRef} className="aspect-[9/16] h-96 w-auto">
+      <video
+        ref={videoRef}
+        src={shouldLoad ? src : undefined}
+        className={className}
+        autoPlay
+        muted
+        loop
+        playsInline
+        controls
+        preload="none"
+      />
+    </div>
+  );
+}
+
 export function PerformanceReels() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
@@ -158,14 +207,9 @@ export function PerformanceReels() {
                   <div key={reel.id} className="shrink-0">
                     <div className="overflow-hidden rounded-lg border-2 border-transparent gradient-daya p-[2px] shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105">
                       <div className="rounded-lg overflow-hidden bg-slate-800/50 h-full">
-                        <video
+                        <LazyVideo
                           src={reel.video}
-                          className="aspect-[9/16] h-96 w-auto object-cover rounded-lg"
-                          autoPlay
-                          muted
-                          loop
-                          playsInline
-                          controls
+                          className="h-full w-full object-cover rounded-lg"
                         />
                       </div>
                     </div>

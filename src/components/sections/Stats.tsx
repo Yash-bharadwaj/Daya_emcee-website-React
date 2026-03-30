@@ -20,6 +20,15 @@ interface StatsProps {
   data: StatsData
 }
 
+const FLOATING_PARTICLE_PRESETS = Array.from({ length: 8 }, (_, i) => ({
+  left: `${((i * 37) % 80) + 10}%`,
+  top: `${((i * 23) % 80) + 10}%`,
+  xMove: ((i * 11) % 80) - 40,
+  yMove: ((i * 13) % 80) - 40,
+  duration: 2 + (i % 3) * 0.5,
+  delay: i * 0.25,
+}))
+
 // Counter animation component
 const AnimatedCounter: React.FC<{ 
   from: number; 
@@ -115,23 +124,23 @@ const StatCard: React.FC<{
 
         {/* Floating particles */}
         <div className="absolute inset-0 overflow-hidden rounded-2xl">
-          {Array.from({ length: 8 }).map((_, i) => (
+          {FLOATING_PARTICLE_PRESETS.map((p, i) => (
             <motion.div
               key={i}
               className="absolute w-1 h-1 bg-[#fdbb2d]/30 rounded-full"
               animate={{
-                x: [0, Math.random() * 100 - 50],
-                y: [0, Math.random() * 100 - 50],
+                x: [0, p.xMove],
+                y: [0, p.yMove],
                 opacity: [0, 1, 0],
               }}
               transition={{
-                duration: Math.random() * 3 + 2,
+                duration: p.duration,
                 repeat: Infinity,
-                delay: Math.random() * 2,
+                delay: p.delay,
               }}
               style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
+                left: p.left,
+                top: p.top,
               }}
             />
           ))}

@@ -1,7 +1,7 @@
 "use client";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "motion/react";
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useMemo } from "react";
 
 export const BackgroundBeamsWithCollision = ({
   children,
@@ -113,6 +113,7 @@ const CollisionMechanism = ({
   };
 }) => {
   const beamRef = useRef<HTMLDivElement>(null);
+  const hasCollidedRef = useRef(false);
   const [collision, setCollision] = useState<{
     detected: boolean;
     coordinates: { x: number; y: number } | null;
@@ -124,18 +125,21 @@ const CollisionMechanism = ({
   const [cycleCollisionDetected, setCycleCollisionDetected] = useState(false);
 
   useEffect(() => {
+    if (cycleCollisionDetected) return;
+
     const checkCollision = () => {
       if (
         beamRef.current &&
         containerRef.current &&
         parentRef.current &&
-        !cycleCollisionDetected
+        !hasCollidedRef.current
       ) {
         const beamRect = beamRef.current.getBoundingClientRect();
         const containerRect = containerRef.current.getBoundingClientRect();
         const parentRect = parentRef.current.getBoundingClientRect();
 
         if (beamRect.bottom >= containerRect.top) {
+          hasCollidedRef.current = true;
           const relativeX =
             beamRect.left - parentRect.left + beamRect.width / 2;
           const relativeY = beamRect.bottom - parentRect.top;
@@ -152,16 +156,17 @@ const CollisionMechanism = ({
       }
     };
 
-    const animationInterval = setInterval(checkCollision, 50);
+    const animationInterval = setInterval(checkCollision, 120);
 
     return () => clearInterval(animationInterval);
-  }, [cycleCollisionDetected, containerRef]);
+  }, [cycleCollisionDetected]);
 
   useEffect(() => {
     if (collision.detected && collision.coordinates) {
       setTimeout(() => {
         setCollision({ detected: false, coordinates: null });
         setCycleCollisionDetected(false);
+        hasCollidedRef.current = false;
       }, 2000);
 
       setTimeout(() => {
@@ -219,13 +224,18 @@ const CollisionMechanism = ({
 };
 
 const Explosion = ({ ...props }: React.HTMLProps<HTMLDivElement>) => {
-  const spans = Array.from({ length: 20 }, (_, index) => ({
-    id: index,
-    initialX: 0,
-    initialY: 0,
-    directionX: Math.floor(Math.random() * 80 - 40),
-    directionY: Math.floor(Math.random() * -50 - 10),
-  }));
+  const spans = useMemo(
+    () =>
+      Array.from({ length: 20 }, (_, index) => ({
+        id: index,
+        initialX: 0,
+        initialY: 0,
+        directionX: Math.floor(Math.abs(Math.sin(index * 2.1)) * 80 - 40),
+        directionY: Math.floor(Math.abs(Math.cos(index * 1.7)) * -50 - 10),
+        duration: 0.6 + (index % 5) * 0.2,
+      })),
+    []
+  );
 
   return (
     <div {...props} className={cn("absolute z-50 h-2 w-2", props.className)}>
@@ -245,7 +255,7 @@ const Explosion = ({ ...props }: React.HTMLProps<HTMLDivElement>) => {
             y: span.directionY,
             opacity: 0,
           }}
-          transition={{ duration: Math.random() * 1.5 + 0.5, ease: "easeOut" }}
+          transition={{ duration: span.duration, ease: "easeOut" }}
           className="absolute h-1 w-1 rounded-full bg-gradient-to-b from-[#fdbb2d] to-[#b21f1f]"
         />
       ))}

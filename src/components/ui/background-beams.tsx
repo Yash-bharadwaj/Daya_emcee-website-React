@@ -1,5 +1,43 @@
 "use client";
 import { cn } from "@/lib/utils";
+import { useMemo } from "react";
+
+type Particle = {
+  left: string;
+  top: string;
+  width: string;
+  height: string;
+  animationDelay: string;
+  animationDuration: string;
+};
+
+function makeParticles(count: number, seed: number, kind: "dot" | "orb"): Particle[] {
+  return Array.from({ length: count }, (_, i) => {
+    const s = seed + i * 17.23;
+    const r1 = Math.abs(Math.sin(s)) * 0.999;
+    const r2 = Math.abs(Math.cos(s * 1.7)) * 0.999;
+    const r3 = Math.abs(Math.sin(s * 2.3 + 4)) * 0.999;
+    const r4 = Math.abs(Math.cos(s * 0.8 + 2)) * 0.999;
+    if (kind === "dot") {
+      return {
+        left: `${r1 * 100}%`,
+        top: `${r2 * 100}%`,
+        width: `${r3 * 6 + 2}px`,
+        height: `${r4 * 6 + 2}px`,
+        animationDelay: `${r1 * 5}s`,
+        animationDuration: `${r3 * 4 + 3}s`,
+      };
+    }
+    return {
+      left: `${r1 * 100}%`,
+      top: `${r2 * 100}%`,
+      width: `${r3 * 100 + 50}px`,
+      height: `${r4 * 100 + 50}px`,
+      animationDelay: `${r2 * 8}s`,
+      animationDuration: `${r3 * 6 + 4}s`,
+    };
+  });
+}
 
 export const BackgroundBeams = ({ className }: { className?: string }) => {
   const paths = [
@@ -13,16 +51,17 @@ export const BackgroundBeams = ({ className }: { className?: string }) => {
     "M220 -120C220 -120 320 80 620 180C920 280 1020 480 1020 480",
   ];
 
+  const dotParticles = useMemo(() => makeParticles(30, 1, "dot"), []);
+  const orbParticles = useMemo(() => makeParticles(5, 99, "orb"), []);
+
   return (
     <div
       className={cn(
         "absolute inset-0 overflow-hidden z-0",
         className
       )}
-      style={{ 
-        willChange: 'transform',
-        transform: 'translateZ(0)',
-        contain: 'layout style paint'
+      style={{
+        contain: "layout style paint",
       }}
     >
       <svg
@@ -50,8 +89,7 @@ export const BackgroundBeams = ({ className }: { className?: string }) => {
             />
           ))}
         </g>
-        
-        {/* Additional animated beams */}
+
         <g opacity="0.6">
           {paths.slice(0, 4).map((path, index) => (
             <path
@@ -85,8 +123,7 @@ export const BackgroundBeams = ({ className }: { className?: string }) => {
               <stop offset="100%" stopColor="#ec4899" stopOpacity="0" />
             </linearGradient>
           ))}
-          
-          {/* Glow gradients */}
+
           {paths.slice(0, 4).map((_, index) => (
             <linearGradient
               key={`glow-${index}`}
@@ -101,8 +138,7 @@ export const BackgroundBeams = ({ className }: { className?: string }) => {
               <stop offset="100%" stopColor="#8b5cf6" stopOpacity="0" />
             </linearGradient>
           ))}
-          
-          {/* Radial gradient for center glow */}
+
           <radialGradient id="centerGlow" cx="50%" cy="50%" r="50%">
             <stop offset="0%" stopColor="#06b6d4" stopOpacity="0.3" />
             <stop offset="50%" stopColor="#8b5cf6" stopOpacity="0.1" />
@@ -111,47 +147,42 @@ export const BackgroundBeams = ({ className }: { className?: string }) => {
         </defs>
       </svg>
 
-      {/* Center glow effect */}
-      <div className="absolute inset-0 bg-gradient-radial from-cyan-500/10 via-purple-500/5 to-transparent"></div>
+      <div className="absolute inset-0 bg-gradient-radial from-cyan-500/10 via-purple-500/5 to-transparent" />
 
-      {/* Additional animated elements */}
       <div className="absolute inset-0">
-        {/* Floating particles */}
-        {Array.from({ length: 30 }).map((_, i) => (
+        {dotParticles.map((p, i) => (
           <div
-            key={i}
+            key={`d-${i}`}
             className="absolute bg-cyan-400/30 rounded-full animate-pulse"
             style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              width: `${Math.random() * 6 + 2}px`,
-              height: `${Math.random() * 6 + 2}px`,
-              animationDelay: `${Math.random() * 5}s`,
-              animationDuration: `${Math.random() * 4 + 3}s`,
+              left: p.left,
+              top: p.top,
+              width: p.width,
+              height: p.height,
+              animationDelay: p.animationDelay,
+              animationDuration: p.animationDuration,
             }}
           />
         ))}
-        
-        {/* Larger glowing orbs */}
-        {Array.from({ length: 5 }).map((_, i) => (
+
+        {orbParticles.map((p, i) => (
           <div
-            key={`orb-${i}`}
+            key={`o-${i}`}
             className="absolute bg-gradient-to-r from-cyan-400/20 to-purple-400/20 rounded-full blur-xl animate-pulse"
             style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              width: `${Math.random() * 100 + 50}px`,
-              height: `${Math.random() * 100 + 50}px`,
-              animationDelay: `${Math.random() * 8}s`,
-              animationDuration: `${Math.random() * 6 + 4}s`,
+              left: p.left,
+              top: p.top,
+              width: p.width,
+              height: p.height,
+              animationDelay: p.animationDelay,
+              animationDuration: p.animationDuration,
             }}
           />
         ))}
       </div>
 
-      {/* Subtle gradient overlays for depth */}
       <div className="absolute inset-0 bg-gradient-to-t from-slate-950/30 via-transparent to-slate-950/30" />
       <div className="absolute inset-0 bg-gradient-to-r from-slate-950/20 via-transparent to-slate-950/20" />
     </div>
   );
-}; 
+};

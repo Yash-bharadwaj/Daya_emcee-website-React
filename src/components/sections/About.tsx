@@ -28,6 +28,8 @@ export function About() {
                   src="/DayaEmcee/images/image25.jpeg"
                   alt="Emcee Daya"
                   className="w-full h-auto object-cover rounded-3xl"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
             </div>

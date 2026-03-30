@@ -203,59 +203,29 @@
   background: hsl(var(--primary) / 0.8);
 }
 
-/* Smooth scrolling */
+/* Smooth scrolling (avoid forcing layers on the whole document) */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
 html {
-  scroll-behavior: smooth;
-  /* Prevent flickering during scroll */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 }
 
-/* Performance optimizations to prevent flickering */
-* {
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  -webkit-perspective: 1000;
-  perspective: 1000;
-}
-
-/* Prevent layout shifts and flickering */
-html, body {
+html,
+body {
   overflow-x: hidden;
   width: 100%;
   position: relative;
 }
 
-/* Optimize animations for better scroll performance */
-[data-motion-component] {
-  will-change: transform, opacity;
-  transform: translateZ(0);
-  -webkit-transform: translateZ(0);
-}
-
-/* Optimize all motion divs */
-div[style*="transform"] {
-  will-change: transform;
-  transform: translateZ(0);
-  -webkit-transform: translateZ(0);
-}
-
-/* Reduce repaints during scroll */
 body {
   -webkit-overflow-scrolling: touch;
-  overscroll-behavior-y: contain;
-  /* Prevent flickering */
-  transform: translateZ(0);
-  -webkit-transform: translateZ(0);
-}
-
-/* Optimize all sections for smooth scrolling */
-section {
-  transform: translateZ(0);
-  -webkit-transform: translateZ(0);
-  will-change: scroll-position;
-  contain: layout style paint;
+  overscroll-behavior-y: auto;
 }
 
 /* Custom cursor for interactive elements */
@@ -335,14 +305,10 @@ section {
   animation-play-state: paused;
 }
 
-/* Infinite moving cards/images animation */
+/* Infinite moving cards/images animation — will-change only on the animated row */
 .scroller {
   --animation-duration: 40s;
   --animation-direction: forwards;
-  /* Performance optimization */
-  will-change: transform;
-  transform: translateZ(0);
-  -webkit-transform: translateZ(0);
   contain: layout style paint;
 }
 

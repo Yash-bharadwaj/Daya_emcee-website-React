@@ -1,9 +1,8 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 import { cn } from "@/lib/utils";
 import createGlobe from "cobe";
-import { useEffect, useRef } from "react";
 import { motion } from "motion/react";
 import { 
   IconMusic,
@@ -11,6 +10,11 @@ import {
   IconHeadphones,
   IconDeviceSpeaker
 } from "@tabler/icons-react";
+
+function stableRotate(seed: number, maxDeg: number) {
+  const t = Math.sin(seed * 12.9898) * 43758.5453;
+  return ((t - Math.floor(t)) * 2 - 1) * maxDeg;
+}
 
 export function DJFeaturesSection() {
   const features = [
@@ -178,7 +182,7 @@ export const SkeletonTwo = () => {
             variants={imageVariants}
             key={"emcee-images-first" + idx}
             style={{
-              rotate: Math.random() * 20 - 10,
+              rotate: stableRotate(idx + 1, 10),
             }}
             whileHover="whileHover"
             whileTap="whileTap"
@@ -190,6 +194,8 @@ export const SkeletonTwo = () => {
               width="500"
               height="500"
               className="rounded-lg h-12 w-12 md:h-16 md:w-16 lg:h-32 lg:w-32 object-cover shrink-0"
+              loading="lazy"
+              decoding="async"
             />
           </motion.div>
         ))}
@@ -201,7 +207,7 @@ export const SkeletonTwo = () => {
           <motion.div
             key={"emcee-images-second" + idx}
             style={{
-              rotate: Math.random() * 20 - 10,
+              rotate: stableRotate(idx + 50, 10),
             }}
             variants={imageVariants}
             whileHover="whileHover"
@@ -214,6 +220,8 @@ export const SkeletonTwo = () => {
               width="500"
               height="500"
               className="rounded-lg h-12 w-12 md:h-16 md:w-16 lg:h-32 lg:w-32 object-cover shrink-0"
+              loading="lazy"
+              decoding="async"
             />
           </motion.div>
         ))}
@@ -225,7 +233,7 @@ export const SkeletonTwo = () => {
           <motion.div
             key={"emcee-images-third" + idx}
             style={{
-              rotate: Math.random() * 15 - 7.5,
+              rotate: stableRotate(idx + 100, 7.5),
             }}
             variants={imageVariants}
             whileHover="whileHover"
@@ -238,6 +246,8 @@ export const SkeletonTwo = () => {
               width="500"
               height="500"
               className="rounded-lg h-10 w-10 md:h-12 md:w-12 lg:h-24 lg:w-24 object-cover shrink-0"
+              loading="lazy"
+              decoding="async"
             />
           </motion.div>
         ))}
@@ -275,6 +285,8 @@ export const SkeletonThree = () => {
             width={800}
             height={800}
             className="h-full w-full aspect-square object-cover object-center rounded-sm blur-none group-hover/image:blur-md transition-all duration-200"
+            loading="lazy"
+            decoding="async"
           />
         </div>
       </div>
@@ -283,30 +295,44 @@ export const SkeletonThree = () => {
 };
 
 export const SkeletonFour = () => {
+  const floatingNotes = useMemo(
+    () =>
+      Array.from({ length: 8 }, (_, i) => {
+        const s = i * 19.17;
+        const left = (Math.abs(Math.sin(s)) * 80 + 10).toFixed(2);
+        const top = (Math.abs(Math.cos(s * 1.3)) * 80 + 10).toFixed(2);
+        const xWiggle = Math.abs(Math.sin(s * 2)) * 50 - 25;
+        const duration = 3 + (i % 4) * 0.75;
+        const delay = i * 0.25;
+        return { i, left: `${left}%`, top: `${top}%`, xWiggle, duration, delay };
+      }),
+    []
+  );
+
   return (
     <div className="h-60 md:h-60 flex flex-col items-center relative bg-transparent dark:bg-transparent mt-10">
       <Globe className="absolute -right-10 md:-right-10 -bottom-80 md:-bottom-72" />
       
       {/* Floating Music Notes */}
       <div className="absolute inset-0 overflow-hidden">
-        {Array.from({ length: 8 }).map((_, i) => (
+        {floatingNotes.map(({ i, left, top, xWiggle, duration, delay }) => (
           <motion.div
             key={i}
             className="absolute"
             animate={{
               y: [0, -100, 0],
-              x: [0, Math.random() * 50 - 25, 0],
+              x: [0, xWiggle, 0],
               rotate: [0, 360],
               opacity: [0, 1, 0],
             }}
             transition={{
-              duration: Math.random() * 4 + 3,
+              duration,
               repeat: Infinity,
-              delay: Math.random() * 2,
+              delay,
             }}
             style={{
-              left: `${Math.random() * 80 + 10}%`,
-              top: `${Math.random() * 80 + 10}%`,
+              left,
+              top,
             }}
           >
             <IconMicrophone2 className="w-6 h-6 text-[#fdbb2d]/60" />
@@ -325,15 +351,18 @@ export const Globe = ({ className }: { className?: string }) => {
 
     if (!canvasRef.current) return;
 
+    const dpr = Math.min(typeof window !== "undefined" ? window.devicePixelRatio : 1, 1.5);
+    const size = Math.round(600 * dpr);
+
     const globe = createGlobe(canvasRef.current, {
-      devicePixelRatio: 2,
-      width: 600 * 2,
-      height: 600 * 2,
+      devicePixelRatio: dpr,
+      width: size,
+      height: size,
       phi: 0,
       theta: 0,
       dark: 1,
       diffuse: 1.2,
-      mapSamples: 16000,
+      mapSamples: 8000,
       mapBrightness: 6,
       baseColor: [0.3, 0.3, 0.3],
       markerColor: [0.1, 0.8, 1],

@@ -1,7 +1,7 @@
 "use client";
 import React from 'react'
 import { motion } from "motion/react";
-import { BackgroundBeamsWithCollision } from '../ui/background-beams-with-collision'
+import { BackgroundBeams } from '../ui/background-beams'
 import { FlipWords } from '../ui/flip-words'
 import { Button } from '../ui/button'
 import { Instagram, Phone, Mail, Play, Star } from 'lucide-react'
@@ -28,14 +28,14 @@ export const Hero: React.FC<HeroProps> = ({ data }) => {
           src="/DayaEmcee/images/image1.1.jpeg" 
           alt="Emcee Daya"
           className="w-full h-full object-cover object-center"
+          fetchPriority="high"
+          decoding="async"
         />
         <div className="absolute inset-0 bg-black/60 dark:bg-black/70"></div>
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/40"></div>
       </div>
 
-      <BackgroundBeamsWithCollision className="z-10">
-        <></>
-      </BackgroundBeamsWithCollision>
+      <BackgroundBeams className="z-10" />
       
       <div className="relative z-50 max-w-7xl mx-auto px-4 py-8 sm:py-12 md:py-16">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
@@ -252,6 +252,9 @@ export const Hero: React.FC<HeroProps> = ({ data }) => {
                   src="/DayaEmcee/images/image1.1.jpeg"
                   alt="Emcee Daya"
                   className="w-full h-auto max-h-[500px] md:max-h-[600px] object-cover rounded-3xl"
+                  fetchPriority="low"
+                  loading="lazy"
+                  decoding="async"
                 />
               </motion.div>
             </div>
