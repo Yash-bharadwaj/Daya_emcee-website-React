@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import React, { useEffect, useState } from "react";
+import React, { useLayoutEffect, useState } from "react";
 
 export const InfiniteMovingCards = ({
   items,
@@ -20,55 +20,44 @@ export const InfiniteMovingCards = ({
   pauseOnHover?: boolean;
   className?: string;
 }) => {
+  const [start, setStart] = useState(false);
   const containerRef = React.useRef<HTMLDivElement>(null);
   const scrollerRef = React.useRef<HTMLUListElement>(null);
 
-  useEffect(() => {
-    addAnimation();
-  }, []);
-  const [start, setStart] = useState(false);
-  function addAnimation() {
-    if (containerRef.current && scrollerRef.current) {
-      const scrollerContent = Array.from(scrollerRef.current.children);
+  useLayoutEffect(() => {
+    const container = containerRef.current;
+    const scroller = scrollerRef.current;
+    if (!container || !scroller) return;
 
-      scrollerContent.forEach((item) => {
-        const duplicatedItem = item.cloneNode(true);
-        if (scrollerRef.current) {
-          scrollerRef.current.appendChild(duplicatedItem);
-        }
-      });
-
-      getDirection();
-      getSpeed();
-      setStart(true);
-    }
-  }
-  const getDirection = () => {
-    if (containerRef.current) {
+    const applyDirectionSpeed = () => {
       if (direction === "left") {
-        containerRef.current.style.setProperty(
-          "--animation-direction",
-          "forwards"
-        );
+        container.style.setProperty("--animation-direction", "forwards");
       } else {
-        containerRef.current.style.setProperty(
-          "--animation-direction",
-          "reverse"
-        );
+        container.style.setProperty("--animation-direction", "reverse");
       }
-    }
-  };
-  const getSpeed = () => {
-    if (containerRef.current) {
       if (speed === "fast") {
-        containerRef.current.style.setProperty("--animation-duration", "20s");
+        container.style.setProperty("--animation-duration", "20s");
       } else if (speed === "normal") {
-        containerRef.current.style.setProperty("--animation-duration", "40s");
+        container.style.setProperty("--animation-duration", "40s");
       } else {
-        containerRef.current.style.setProperty("--animation-duration", "80s");
+        container.style.setProperty("--animation-duration", "80s");
       }
+    };
+
+    if (scroller.children.length > items.length) {
+      applyDirectionSpeed();
+      setStart(true);
+      return;
     }
-  };
+
+    Array.from(scroller.children).forEach((item) => {
+      scroller.appendChild(item.cloneNode(true));
+    });
+
+    applyDirectionSpeed();
+    setStart(true);
+  }, [direction, speed, items.length]);
+
   return (
     <div
       ref={containerRef}
@@ -76,7 +65,7 @@ export const InfiniteMovingCards = ({
         "scroller relative z-20 max-w-7xl overflow-hidden overflow-y-hidden [mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent)] w-full",
         className
       )}
-      style={{ contain: 'layout style paint', overflowY: 'hidden' }}
+      style={{ contain: "layout style paint", overflowY: "hidden" }}
     >
       <ul
         ref={scrollerRef}
@@ -85,16 +74,16 @@ export const InfiniteMovingCards = ({
           start && "animate-scroll ",
           pauseOnHover && "hover:[animation-play-state:paused]"
         )}
-        style={{ willChange: 'transform', overflowY: 'hidden' }}
+        style={{ willChange: "transform", overflowY: "hidden" }}
       >
-        {items.map((item) => (
+        {items.map((item, idx) => (
           <li
             className="w-[280px] max-w-[90vw] relative rounded-2xl border border-b-0 flex-shrink-0 border-slate-700 px-4 py-4 md:w-[350px] md:px-8 md:py-6 lg:w-[450px]"
             style={{
               background:
                 "linear-gradient(180deg, var(--slate-800), var(--slate-900)",
             }}
-            key={item.name}
+            key={`${item.name}-${item.title}-${idx}`}
           >
             <blockquote>
               <div
@@ -120,4 +109,4 @@ export const InfiniteMovingCards = ({
       </ul>
     </div>
   );
-}; 
+};

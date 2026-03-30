@@ -1,6 +1,15 @@
 "use client";
 import { FloatingNav } from "./ui/floating-navbar";
-import { IconHome, IconPhoto, IconStar, IconChartBar, IconSettings } from "@tabler/icons-react";
+import {
+  IconHome,
+  IconPhoto,
+  IconStar,
+  IconChartBar,
+  IconSettings,
+  IconVideo,
+  IconUser,
+  IconMicrophone2,
+} from "@tabler/icons-react";
 
 export function Navigation() {
   const navItems = [
@@ -11,8 +20,18 @@ export function Navigation() {
     },
     {
       name: "Gallery",
-      link: "#gallery", 
+      link: "#gallery",
       icon: <IconPhoto className="h-4 w-4 text-neutral-500 dark:text-white" />,
+    },
+    {
+      name: "Reels",
+      link: "#reels",
+      icon: <IconVideo className="h-4 w-4 text-neutral-500 dark:text-white" />,
+    },
+    {
+      name: "About",
+      link: "#about",
+      icon: <IconUser className="h-4 w-4 text-neutral-500 dark:text-white" />,
     },
     {
       name: "Reviews",
@@ -28,6 +47,11 @@ export function Navigation() {
       name: "Features",
       link: "#features",
       icon: <IconSettings className="h-4 w-4 text-neutral-500 dark:text-white" />,
+    },
+    {
+      name: "Services",
+      link: "#emcee-services",
+      icon: <IconMicrophone2 className="h-4 w-4 text-neutral-500 dark:text-white" />,
     },
   ];
 

@@ -254,6 +254,7 @@ export const Contact: React.FC<ContactProps> = ({ data }) => {
                     href={data.social[0]?.url || "https://www.instagram.com/emcee_daya/"} 
                     target="_blank"
                     rel="noopener noreferrer"
+                    aria-label="Instagram"
                     className="flex items-center justify-center w-12 h-12 gradient-daya rounded-full text-white hover:scale-110 transition-transform duration-300"
                   >
                     <Instagram className="h-5 w-5" />

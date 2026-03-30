@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState, useRef } from 'react'
 import { motion, useInView, useMotionValue, useSpring } from 'motion/react'
+import { scrollRevealViewport } from '@/lib/motion-presets'
 import { TrendingUp, Users, Calendar, Star } from 'lucide-react'
 
 interface Achievement {
@@ -184,16 +185,8 @@ export const Stats: React.FC<StatsProps> = ({ data }) => {
             backgroundSize: '50px 50px',
           }}
         >
-          <motion.div
-            animate={{ 
-              backgroundPosition: ['0px 0px', '50px 50px'] 
-            }}
-            transition={{ 
-              duration: 20, 
-              repeat: Infinity, 
-              ease: "linear" 
-            }}
-            className="w-full h-full"
+          <div
+            className="stats-grid-drift w-full h-full"
             style={{
               backgroundImage: `
                 linear-gradient(rgba(253, 187, 45, 0.1) 1px, transparent 1px),
@@ -215,14 +208,14 @@ export const Stats: React.FC<StatsProps> = ({ data }) => {
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          viewport={{ once: true }}
+          viewport={scrollRevealViewport}
           className="text-center mb-16 md:mb-20"
         >
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true }}
+            viewport={scrollRevealViewport}
             className="inline-flex items-center space-x-2 bg-[#fdbb2d]/10 border border-[#fdbb2d]/20 rounded-full px-6 py-2 mb-6"
           >
             <Star className="w-4 h-4 text-[#fdbb2d]" />
@@ -241,7 +234,7 @@ export const Stats: React.FC<StatsProps> = ({ data }) => {
             initial={{ width: 0 }}
             whileInView={{ width: "100px" }}
             transition={{ duration: 1, delay: 0.5 }}
-            viewport={{ once: true }}
+            viewport={scrollRevealViewport}
             className="h-1 gradient-daya mx-auto mb-6 rounded-full"
           />
           
@@ -271,7 +264,7 @@ export const Stats: React.FC<StatsProps> = ({ data }) => {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}
-          viewport={{ once: true }}
+          viewport={scrollRevealViewport}
           className="text-center mt-16 md:mt-20"
         >
           <p className="text-lg md:text-xl text-slate-300 mb-8">

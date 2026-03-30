@@ -223,9 +223,33 @@ body {
   position: relative;
 }
 
+/* Fixed nav (~2.5rem) + padding: in-page anchors land below the bar */
+section[id] {
+  scroll-margin-top: 6rem;
+}
+
 body {
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-y: auto;
+}
+
+/* Stats section: CSS drift instead of JS backgroundPosition (fewer main-thread updates) */
+@keyframes stats-grid-drift {
+  to {
+    background-position: 50px 50px;
+  }
+}
+
+.stats-grid-drift {
+  animation: stats-grid-drift 20s linear infinite;
+  will-change: background-position;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stats-grid-drift {
+    animation: none;
+    will-change: auto;
+  }
 }
 
 /* Custom cursor for interactive elements */

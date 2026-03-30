@@ -1,6 +1,7 @@
 "use client";
 import React from 'react'
 import { motion } from "motion/react";
+import { scrollRevealViewportHero } from '@/lib/motion-presets'
 import { BackgroundBeams } from '../ui/background-beams'
 import { FlipWords } from '../ui/flip-words'
 import { Button } from '../ui/button'
@@ -62,7 +63,7 @@ export const Hero: React.FC<HeroProps> = ({ data }) => {
           <motion.h1
             initial={{ opacity: 0.5, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
+            viewport={scrollRevealViewportHero}
             transition={{
               delay: 0.1,
               duration: 0.6,
@@ -77,6 +78,7 @@ export const Hero: React.FC<HeroProps> = ({ data }) => {
                 <motion.div
                   initial={{ width: 0 }}
                   whileInView={{ width: "100%" }}
+                  viewport={scrollRevealViewportHero}
                   transition={{
                     delay: 1,
                     duration: 1.2,
@@ -88,6 +90,7 @@ export const Hero: React.FC<HeroProps> = ({ data }) => {
                 <motion.div
                   initial={{ opacity: 0, scale: 0.8 }}
                   whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={scrollRevealViewportHero}
                   transition={{
                     delay: 1.5,
                     duration: 0.8,
@@ -104,6 +107,7 @@ export const Hero: React.FC<HeroProps> = ({ data }) => {
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
+          viewport={scrollRevealViewportHero}
           transition={{
             delay: 0.5,
             duration: 0.8,
@@ -140,6 +144,7 @@ export const Hero: React.FC<HeroProps> = ({ data }) => {
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
+          viewport={scrollRevealViewportHero}
           transition={{
             delay: 0.7,
             duration: 0.8,
@@ -171,6 +176,7 @@ export const Hero: React.FC<HeroProps> = ({ data }) => {
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
+          viewport={scrollRevealViewportHero}
           transition={{
             delay: 0.9,
             duration: 0.8,
@@ -182,6 +188,7 @@ export const Hero: React.FC<HeroProps> = ({ data }) => {
             href={data.instagram} 
             target="_blank" 
             rel="noopener noreferrer"
+            aria-label="Instagram"
             className="group relative"
           >
             <div className="absolute inset-0 gradient-daya rounded-full blur-lg sm:blur-xl opacity-60 group-hover:opacity-100 transition-all duration-300 animate-pulse"></div>
@@ -194,6 +201,7 @@ export const Hero: React.FC<HeroProps> = ({ data }) => {
           <a 
             href="#reels" 
             className="group relative"
+            aria-label="Watch performance reels"
           >
             <div className="absolute inset-0 gradient-daya rounded-full blur-lg sm:blur-xl opacity-60 group-hover:opacity-100 transition-all duration-300 animate-pulse"></div>
             <div className="relative p-3 sm:p-4 md:p-5 rounded-full gradient-daya text-white hover:scale-110 transition-all duration-300 cursor-interactive shadow-2xl">
@@ -206,6 +214,7 @@ export const Hero: React.FC<HeroProps> = ({ data }) => {
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           whileInView={{ opacity: 1, scale: 1 }}
+          viewport={scrollRevealViewportHero}
           transition={{
             delay: 1.1,
             duration: 0.8,
@@ -238,7 +247,7 @@ export const Hero: React.FC<HeroProps> = ({ data }) => {
               duration: 0.8,
               ease: "easeOut",
             }}
-            viewport={{ once: true }}
+            viewport={scrollRevealViewportHero}
             className="relative flex items-center justify-center"
           >
             {/* Image Container with Simple Gradient Border */}
@@ -295,6 +304,7 @@ export const Hero: React.FC<HeroProps> = ({ data }) => {
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
+          viewport={scrollRevealViewportHero}
           transition={{
             delay: 1.5,
             duration: 1,

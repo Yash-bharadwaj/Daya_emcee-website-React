@@ -3,6 +3,7 @@
 import { InfiniteMovingImages } from "../ui/infinite-moving-images";
 import { BackgroundBeams } from "../ui/background-beams";
 import { motion } from "motion/react";
+import { scrollRevealViewport } from "@/lib/motion-presets";
 
 export function ImageGallery() {
   // Select images from DayaEmcee folder
@@ -53,7 +54,7 @@ export function ImageGallery() {
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          viewport={{ once: true }}
+          viewport={scrollRevealViewport}
           className="text-center mb-12 md:mb-16"
         >
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white mb-4">
@@ -71,7 +72,7 @@ export function ImageGallery() {
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          viewport={{ once: true }}
+          viewport={scrollRevealViewport}
           className="flex flex-col antialiased items-center justify-center relative"
         >
           <InfiniteMovingImages

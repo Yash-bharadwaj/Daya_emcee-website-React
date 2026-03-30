@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
+import { scrollRevealViewport } from "@/lib/motion-presets";
 import { BackgroundBeams } from "../ui/background-beams";
 
 export function About() {
@@ -19,7 +20,7 @@ export function About() {
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            viewport={{ once: true }}
+            viewport={scrollRevealViewport}
             className="relative flex items-center justify-center"
           >
             <div className="relative rounded-3xl overflow-hidden gradient-daya p-[2px] max-w-md mx-auto">
@@ -40,7 +41,7 @@ export function About() {
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-            viewport={{ once: true }}
+            viewport={scrollRevealViewport}
             className="space-y-6"
           >
             <div>

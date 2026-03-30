@@ -3,6 +3,7 @@
 import { InfiniteMovingCards } from "../ui/infinite-moving-cards";
 import { BackgroundBeams } from "../ui/background-beams";
 import { motion } from "motion/react";
+import { scrollRevealViewport } from "@/lib/motion-presets";
 
 export function ClientReviews() {
   const clientTestimonials = [
@@ -103,7 +104,7 @@ export function ClientReviews() {
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={scrollRevealViewport}
           className="flex flex-col antialiased items-center justify-center relative w-full overflow-x-hidden"
         >
           <div className="w-full overflow-x-hidden">
@@ -132,7 +133,7 @@ export function ClientReviews() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.5 }}
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={scrollRevealViewport}
           className="text-center mt-12 md:mt-16"
         >
           <p className="text-xl md:text-2xl font-bold text-white mb-6">

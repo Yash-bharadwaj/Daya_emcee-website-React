@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
+import { scrollRevealViewport } from "@/lib/motion-presets";
 import { BackgroundBeams } from "../ui/background-beams";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useRef, useState, useEffect } from "react";
@@ -145,7 +146,7 @@ export function PerformanceReels() {
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          viewport={{ once: true }}
+          viewport={scrollRevealViewport}
           className="text-center mb-12 md:mb-16"
         >
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white mb-4">
@@ -163,7 +164,7 @@ export function PerformanceReels() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
-          viewport={{ once: true }}
+          viewport={scrollRevealViewport}
           className="mt-12 md:mt-16 relative"
         >
           <div className="relative">
@@ -225,7 +226,7 @@ export function PerformanceReels() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.5 }}
-          viewport={{ once: true }}
+          viewport={scrollRevealViewport}
           className="text-center mt-12 md:mt-16"
         >
           <p className="text-lg md:text-xl text-slate-300 mb-6">

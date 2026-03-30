@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import {
   IconMusic,
@@ -58,7 +59,10 @@ export function DJFeaturesSection() {
     },
   ];
   return (
-    <section className="relative py-20 md:py-32 bg-gradient-to-b from-slate-900 via-slate-950 to-slate-900">
+    <section
+      id="emcee-services"
+      className="relative py-20 md:py-32 bg-gradient-to-b from-slate-900 via-slate-950 to-slate-900"
+    >
       {/* Background Effects */}
       <div className="absolute inset-0">
         <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-[#fdbb2d]/5 rounded-full blur-3xl animate-pulse"></div>
@@ -82,7 +86,7 @@ const Feature = ({
 }: {
   title: string;
   description: string;
-  icon: React.ReactNode;
+  icon: ReactNode;
   index: number;
 }) => {
   return (
